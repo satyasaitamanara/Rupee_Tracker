@@ -68,6 +68,10 @@ def token_required(f):
     return decorated
 
 # Routes
+@app.route("/")
+def home():
+    return "🎉 Flask App is Live on Render!"
+    
 @app.route('/api/auth/signup', methods=['POST'])
 def signup():
     data = request.get_json()
