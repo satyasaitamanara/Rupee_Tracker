@@ -12,10 +12,10 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Database configuration
 db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'budget_tracker'
+    'host': 'b3qkerahnkmvg0vzmrfo-mysql.services.clever-cloud.com',
+    'user': 'ug0mbw5bsjxhsdh8',
+    'password': '97dHOs62cTyj8tqcXUir',
+    'database': 'b3qkerahnkmvg0vzmrfo'
 }
 
 # Secret key for JWT
