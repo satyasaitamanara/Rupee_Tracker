@@ -32,14 +32,16 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="bg-white shadow-lg border-b border-gray-200">
+      <nav className="navbar-enhanced">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/dashboard" className="flex items-center">
-                  <IndianRupee className="h-8 w-8 text-blue-600" />
-                  <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 glow-purple">
+                    <IndianRupee className="h-8 w-8 text-purple-400" />
+                  </div>
+                  <span className="ml-3 text-xl font-bold gradient-text">
                     Rupee Tracker
                   </span>
                 </Link>
@@ -52,14 +54,14 @@ const Navbar: React.FC = () => {
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) =>
-                      `inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 ${
+                      `inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
                         isActive
-                          ? 'border-blue-500 text-blue-600'
-                          : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                          ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-400 border border-purple-400/30'
+                          : 'text-gray-300 hover:text-white hover:bg-white/10'
                       }`
                     }
                   >
-                    <span className="mr-1">{link.icon}</span>
+                    <span className="mr-2">{link.icon}</span>
                     {link.label}
                   </NavLink>
                 ))}
@@ -70,12 +72,12 @@ const Navbar: React.FC = () => {
             <div className="flex items-center">
               <div className="hidden sm:flex sm:items-center sm:ml-6">
                 <div className="ml-3 relative flex items-center">
-                  <span className="text-sm font-medium text-gray-700 mr-3">
+                  <span className="text-sm font-semibold text-white mr-4">
                     {user?.username}
                   </span>
                   <button
                     onClick={logout}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
+                    className="btn-danger"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign out
@@ -87,7 +89,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-center sm:hidden">
                 <button
                   onClick={toggleMobileMenu}
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                  className="inline-flex items-center justify-center p-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none transition-all duration-200"
                 >
                   <span className="sr-only">Open main menu</span>
                   {isMobileMenuOpen ? (
@@ -103,16 +105,16 @@ const Navbar: React.FC = () => {
         
         {/* Mobile menu */}
         <div className={`sm:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-          <div className="pt-2 pb-3 space-y-1">
+          <div className="pt-4 pb-3 space-y-2 px-4">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                  `block px-4 py-3 rounded-xl text-base font-semibold transition-all duration-200 ${
                     isActive
-                      ? 'bg-blue-50 border-blue-500 text-blue-700'
-                      : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+                      ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-400 border border-purple-400/30'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`
                 }
                 onClick={closeMobileMenu}
@@ -123,15 +125,15 @@ const Navbar: React.FC = () => {
                 </div>
               </NavLink>
             ))}
-            <div className="mt-3 px-3 py-3 border-t border-gray-200">
+            <div className="mt-4 px-4 py-4 border-t border-white/10">
               <div className="flex items-center justify-between">
-                <div className="text-base font-medium text-gray-800">{user?.username}</div>
+                <div className="text-base font-semibold text-white">{user?.username}</div>
                 <button
                   onClick={() => {
                     closeMobileMenu();
                     logout();
                   }}
-                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                  className="btn-danger text-sm px-3 py-2"
                 >
                   <LogOut className="w-4 h-4 mr-1" />
                   Sign out
@@ -143,9 +145,9 @@ const Navbar: React.FC = () => {
       </nav>
       
       {/* Page header */}
-      <header className="bg-white shadow">
+      <header className="bg-white/5 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold gradient-text">
             {location.pathname === '/dashboard' && 'Dashboard'}
             {location.pathname === '/dashboard/transactions' && 'Transactions'}
             {location.pathname === '/dashboard/add-transaction' && 'Add Transaction'}

@@ -84,16 +84,16 @@ const TransactionList: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto animate-fade-in">
       {/* Action bar */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div className="relative flex-grow max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
+            <Search className="h-5 w-5 text-purple-400" />
           </div>
           <input
             type="text"
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="input-field pl-10"
             placeholder="Search transactions..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -104,10 +104,10 @@ const TransactionList: React.FC = () => {
           <div className="relative inline-block w-full sm:w-auto">
             <div className="flex">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Filter className="h-5 w-5 text-gray-400" />
+                <Filter className="h-5 w-5 text-purple-400" />
               </div>
               <select
-                className="block w-full pl-10 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="input-field pl-10 pr-10"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value as 'all' | 'income' | 'expense')}
               >
@@ -120,102 +120,101 @@ const TransactionList: React.FC = () => {
           
           <Link
             to="/dashboard/add-transaction"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="btn-primary"
           >
-            <PlusCircle className="h-4 w-4 mr-1" />
+            <PlusCircle className="h-5 w-5 mr-2" />
             Add
           </Link>
         </div>
       </div>
       
       {/* Transactions Table/List */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="table-enhanced animate-slide-up">
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+            <div className="loading-spinner-large"></div>
           </div>
         ) : filteredTransactions.length > 0 ? (
           <>
             {/* Desktop view */}
             <div className="hidden md:block">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-white/10">
+                <thead className="table-header">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                       Type
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                       Description
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                       Category
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                       Amount
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">
                       Date
                     </th>
-                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-4 text-right text-sm font-bold text-white uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="divide-y divide-white/10">
                   {filteredTransactions.map((transaction) => (
-                    <tr key={transaction.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                    <tr key={transaction.id} className="table-row">
+                      <td className="px-6 py-5 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className={`p-2 rounded-full ${
-                            transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                          <div className={`p-3 rounded-2xl ${
+                            transaction.type === 'income' 
+                              ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 glow-green' 
+                              : 'bg-gradient-to-br from-red-500/20 to-pink-500/20 glow-red'
                           }`}>
                             {transaction.type === 'income' ? (
-                              <TrendingUp className={`h-5 w-5 text-green-600`} />
+                              <TrendingUp className="h-6 w-6 text-green-400" />
                             ) : (
-                              <TrendingDown className={`h-5 w-5 text-red-600`} />
+                              <TrendingDown className="h-6 w-6 text-red-400" />
                             )}
                           </div>
-                          <span className="ml-2 text-sm text-gray-900 capitalize">
+                          <span className="ml-3 text-sm text-white font-semibold capitalize">
                             {transaction.type}
                           </span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{transaction.description}</div>
+                      <td className="px-6 py-5 whitespace-nowrap">
+                        <div className="text-sm text-white font-medium">{transaction.description}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                      <td className="px-6 py-5 whitespace-nowrap">
+                        <span className="badge-category">
                           {transaction.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className={`text-sm font-medium ${
-                          transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                      <td className="px-6 py-5 whitespace-nowrap">
+                        <div className={`text-sm font-bold ${
+                          transaction.type === 'income' ? 'text-green-400' : 'text-red-400'
                         }`}>
                           {transaction.type === 'income' ? '+' : '-'} {formatCurrency(transaction.amount)}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">{formatDate(transaction.date)}</div>
+                      <td className="px-6 py-5 whitespace-nowrap">
+                        <div className="text-sm text-gray-300">{formatDate(transaction.date)}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
                           <Link
                             to={`/dashboard/edit-transaction/${transaction.id}`}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="p-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 hover:text-blue-300 transition-all duration-200"
                           >
                             <Edit className="h-5 w-5" />
                           </Link>
                           <button
                             onClick={() => handleDelete(transaction.id)}
-                            className="text-red-600 hover:text-red-900 focus:outline-none"
+                            className="p-2 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 hover:text-red-300 transition-all duration-200 focus:outline-none"
                             disabled={isDeleting === transaction.id}
                           >
                             {isDeleting === transaction.id ? (
-                              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
+                              <div className="loading-spinner w-5 h-5 border-2"></div>
                             ) : (
                               <Trash2 className="h-5 w-5" />
                             )}
@@ -230,51 +229,52 @@ const TransactionList: React.FC = () => {
             
             {/* Mobile view */}
             <div className="md:hidden">
-              <ul className="divide-y divide-gray-200">
+              <ul className="divide-y divide-white/10">
                 {filteredTransactions.map((transaction) => (
-                  <li key={transaction.id} className="px-4 py-4">
+                  <li key={transaction.id} className="px-4 py-5 hover:bg-white/5 transition-all duration-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full ${
-                          transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                        <div className={`p-3 rounded-2xl ${
+                          transaction.type === 'income' 
+                            ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 glow-green' 
+                            : 'bg-gradient-to-br from-red-500/20 to-pink-500/20 glow-red'
                         }`}>
                           {transaction.type === 'income' ? (
-                            <TrendingUp className={`h-5 w-5 text-green-600`} />
+                            <TrendingUp className="h-6 w-6 text-green-400" />
                           ) : (
-                            <TrendingDown className={`h-5 w-5 text-red-600`} />
+                            <TrendingDown className="h-6 w-6 text-red-400" />
                           )}
                         </div>
                         <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">{transaction.description}</p>
-                          <p className="text-xs text-gray-500">{transaction.category}</p>
+                          <p className="text-sm font-semibold text-white">{transaction.description}</p>
+                          <span className="inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-400">
+                            {transaction.category}
+                          </span>
                         </div>
                       </div>
                       <div className="flex items-center">
                         <div className="text-right mr-4">
-                          <p className={`text-sm font-medium ${
-                            transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                          <p className={`text-sm font-bold ${
+                            transaction.type === 'income' ? 'text-green-400' : 'text-red-400'
                           }`}>
                             {transaction.type === 'income' ? '+' : '-'} {formatCurrency(transaction.amount)}
                           </p>
-                          <p className="text-xs text-gray-500">{formatDate(transaction.date)}</p>
+                          <p className="text-xs text-gray-400">{formatDate(transaction.date)}</p>
                         </div>
                         <div className="flex space-x-2">
                           <Link
                             to={`/dashboard/edit-transaction/${transaction.id}`}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="p-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 hover:text-blue-300 transition-all duration-200"
                           >
                             <Edit className="h-5 w-5" />
                           </Link>
                           <button
                             onClick={() => handleDelete(transaction.id)}
-                            className="text-red-600 hover:text-red-900 focus:outline-none"
+                            className="p-2 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 hover:text-red-300 transition-all duration-200 focus:outline-none"
                             disabled={isDeleting === transaction.id}
                           >
                             {isDeleting === transaction.id ? (
-                              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
+                              <div className="loading-spinner w-5 h-5 border-2"></div>
                             ) : (
                               <Trash2 className="h-5 w-5" />
                             )}
@@ -288,34 +288,23 @@ const TransactionList: React.FC = () => {
             </div>
           </>
         ) : (
-          <div className="text-center py-12">
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-              />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
-            <p className="mt-1 text-sm text-gray-500">
+          <div className="text-center py-16">
+            <div className="p-6 rounded-full bg-purple-500/20 mb-6 mx-auto w-fit glow-purple">
+              <PlusCircle className="h-16 w-16 text-purple-400" />
+            </div>
+            <h3 className="mt-4 text-xl font-bold text-white">No transactions</h3>
+            <p className="mt-2 text-gray-300">
               {searchTerm || filter !== 'all'
                 ? 'No transactions match your search criteria.'
                 : 'Get started by creating a new transaction.'}
             </p>
             {!searchTerm && filter === 'all' && (
-              <div className="mt-6">
+              <div className="mt-8">
                 <Link
                   to="/dashboard/add-transaction"
-                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="btn-primary"
                 >
-                  <PlusCircle className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                  <PlusCircle className="h-5 w-5 mr-2" />
                   Add Transaction
                 </Link>
               </div>

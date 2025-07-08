@@ -8,9 +8,9 @@ import EditTransaction from '../components/EditTransaction';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <Navbar />
-      <div className="flex-grow p-4 sm:p-6 lg:p-8 bg-gray-50">
+      <div className="flex-grow p-4 sm:p-6 lg:p-8">
         <Routes>
           <Route path="/" element={<Overview />} />
           <Route path="/transactions" element={<TransactionList />} />

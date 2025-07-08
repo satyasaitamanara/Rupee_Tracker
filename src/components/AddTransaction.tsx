@@ -75,65 +75,67 @@ const AddTransaction: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white bg-opacity-90 backdrop-blur-lg shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+    <div className="max-w-3xl mx-auto animate-fade-in">
+      <div className="card">
         <div className="px-6 py-8">
           <div className="flex items-center justify-between mb-8">
             <button
               onClick={() => navigate('/dashboard/transactions')}
-              className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center text-gray-300 hover:text-white transition-colors duration-200"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Transactions
             </button>
             <div className="flex items-center">
-              <IndianRupee className="w-6 h-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-bold text-gray-900">New Transaction</h2>
+              <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 glow-purple mr-3">
+                <IndianRupee className="w-6 h-6 text-purple-400" />
+              </div>
+              <h2 className="text-2xl font-bold gradient-text">New Transaction</h2>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Transaction Type */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-purple p-6">
+              <label className="block text-sm font-semibold text-white mb-4">
                 Transaction Type
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
-                  className={`flex items-center justify-center px-6 py-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                  className={`flex items-center justify-center px-6 py-4 rounded-xl text-sm font-bold transition-all duration-300 ${
                     formData.type === 'income'
-                      ? 'bg-green-100 text-green-800 ring-2 ring-green-500'
-                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                      ? 'btn-success'
+                      : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'income' }))}
                 >
-                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'income' ? 'text-green-600' : 'text-gray-400'}`} />
+                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'income' ? 'text-white' : 'text-gray-400'}`} />
                   Income
                 </button>
                 <button
                   type="button"
-                  className={`flex items-center justify-center px-6 py-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                  className={`flex items-center justify-center px-6 py-4 rounded-xl text-sm font-bold transition-all duration-300 ${
                     formData.type === 'expense'
-                      ? 'bg-red-100 text-red-800 ring-2 ring-red-500'
-                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                      ? 'btn-danger'
+                      : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'expense' }))}
                 >
-                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'expense' ? 'text-red-600' : 'text-gray-400'}`} />
+                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'expense' ? 'text-white' : 'text-gray-400'}`} />
                   Expense
                 </button>
               </div>
             </div>
             
             {/* Amount */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-blue p-6">
+              <label htmlFor="amount" className="block text-sm font-semibold text-white mb-4">
                 Amount
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <IndianRupee className="h-5 w-5 text-gray-400" />
+                  <IndianRupee className="h-5 w-5 text-blue-400" />
                 </div>
                 <input
                   type="number"
@@ -143,22 +145,22 @@ const AddTransaction: React.FC = () => {
                   step="0.01"
                   value={formData.amount || ''}
                   onChange={handleChange}
-                  className={`block w-full pl-12 pr-4 py-4 text-lg rounded-xl transition-all duration-200 ${
+                  className={`input-field pl-12 py-4 text-lg ${
                     errors.amount
-                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                      : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                  } bg-white`}
+                      ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                      : ''
+                  }`}
                   placeholder="0.00"
                 />
               </div>
               {errors.amount && (
-                <p className="mt-2 text-sm text-red-600">{errors.amount}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.amount}</p>
               )}
             </div>
             
             {/* Description */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-green p-6">
+              <label htmlFor="description" className="block text-sm font-semibold text-white mb-4">
                 Description
               </label>
               <input
@@ -167,21 +169,21 @@ const AddTransaction: React.FC = () => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.description
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
                 placeholder="What's this transaction for?"
               />
               {errors.description && (
-                <p className="mt-2 text-sm text-red-600">{errors.description}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.description}</p>
               )}
             </div>
             
             {/* Category */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-orange p-6">
+              <label htmlFor="category" className="block text-sm font-semibold text-white mb-4">
                 Category
               </label>
               <select
@@ -189,11 +191,11 @@ const AddTransaction: React.FC = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.category
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
               >
                 {categories.map((category) => (
                   <option key={category} value={category}>
@@ -202,13 +204,13 @@ const AddTransaction: React.FC = () => {
                 ))}
               </select>
               {errors.category && (
-                <p className="mt-2 text-sm text-red-600">{errors.category}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.category}</p>
               )}
             </div>
             
             {/* Date */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-purple p-6">
+              <label htmlFor="date" className="block text-sm font-semibold text-white mb-4">
                 Date
               </label>
               <input
@@ -217,14 +219,14 @@ const AddTransaction: React.FC = () => {
                 id="date"
                 value={formData.date}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.date
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
               />
               {errors.date && (
-                <p className="mt-2 text-sm text-red-600">{errors.date}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.date}</p>
               )}
             </div>
             
@@ -233,7 +235,7 @@ const AddTransaction: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigate('/dashboard/transactions')}
-                className="px-6 py-4 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-all duration-200"
+                className="px-6 py-4 border border-white/20 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
               >
                 Cancel
               </button>
@@ -242,18 +244,15 @@ const AddTransaction: React.FC = () => {
                 disabled={isSubmitting}
                 className={`px-8 py-4 rounded-xl text-white font-semibold transition-all duration-200 ${
                   formData.type === 'income'
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-600'
-                    : 'bg-gradient-to-r from-blue-500 to-indigo-600'
-                } hover:shadow-lg transform hover:-translate-y-0.5 ${
+                    ? 'btn-success'
+                    : 'btn-primary'
+                } ${
                   isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
                 {isSubmitting ? (
                   <div className="flex items-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    <div className="loading-spinner w-5 h-5 border-2 mr-3"></div>
                     Saving...
                   </div>
                 ) : (
