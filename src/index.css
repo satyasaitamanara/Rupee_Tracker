@@ -74,6 +74,37 @@
     @apply shadow-lg shadow-purple-500/25 bg-white/15;
   }
   
+  /* Fix dropdown option visibility */
+  .input-field option {
+    @apply bg-gray-800 text-white border-none;
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+  }
+  
+  .input-field option:hover {
+    @apply bg-gray-700;
+    background-color: #374151 !important;
+  }
+  
+  .input-field option:checked {
+    @apply bg-purple-600 text-white;
+    background-color: #9333ea !important;
+  }
+  
+  /* Enhanced select styling */
+  select.input-field {
+    @apply cursor-pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  select.input-field:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a855f7' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+  
   .navbar-enhanced {
     @apply bg-gradient-to-r from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-xl border-b border-white/10 shadow-2xl;
   }
