@@ -43,7 +43,7 @@
   }
   
   .card-colorful {
-    @apply rounded-2xl shadow-2xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:shadow-3xl;
+    @apply rounded-2xl shadow-2xl border backdrop-blur-xl transition-all duration-300 hover:scale-105;
   }
   
   .card-blue {
