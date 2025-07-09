@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createTransaction, getCategories, TransactionFormData } from '../services/transactionService';
-import { IndianRupee, Plus, ArrowLeft } from 'lucide-react';
+import { IndianRupee, ArrowLeft } from 'lucide-react';
 
 const AddTransaction: React.FC = () => {
   const navigate = useNavigate();
@@ -110,7 +110,7 @@ const AddTransaction: React.FC = () => {
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'income' }))}
                 >
-                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'income' ? 'text-white' : 'text-gray-400'}`} />
+                  <IndianRupee className={`w-5 h-5 mr-2 ${formData.type === 'income' ? 'text-white' : 'text-gray-400'}`} />
                   Income
                 </button>
                 <button
@@ -122,7 +122,7 @@ const AddTransaction: React.FC = () => {
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'expense' }))}
                 >
-                  <Plus className={`w-5 h-5 mr-2 ${formData.type === 'expense' ? 'text-white' : 'text-gray-400'}`} />
+                  <IndianRupee className={`w-5 h-5 mr-2 ${formData.type === 'expense' ? 'text-white' : 'text-gray-400'}`} />
                   Expense
                 </button>
               </div>

@@ -148,6 +148,7 @@ const EditTransaction: React.FC = () => {
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'income' }))}
                 >
+                  <IndianRupee className={`w-5 h-5 mr-2 ${formData.type === 'income' ? 'text-white' : 'text-gray-400'}`} />
                   Income
                 </button>
                 <button
@@ -159,6 +160,7 @@ const EditTransaction: React.FC = () => {
                   }`}
                   onClick={() => setFormData(prev => ({ ...prev, type: 'expense' }))}
                 >
+                  <IndianRupee className={`w-5 h-5 mr-2 ${formData.type === 'expense' ? 'text-white' : 'text-gray-400'}`} />
                   Expense
                 </button>
               </div>
@@ -195,8 +197,8 @@ const EditTransaction: React.FC = () => {
             </div>
 
             {/* Description */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-green p-6">
+              <label htmlFor="description" className="block text-sm font-semibold text-white mb-4">
                 Description
               </label>
               <input
@@ -205,21 +207,21 @@ const EditTransaction: React.FC = () => {
                 id="description"
                 value={formData.description}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.description
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
                 placeholder="What's this transaction for?"
               />
               {errors.description && (
-                <p className="mt-2 text-sm text-red-600">{errors.description}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.description}</p>
               )}
             </div>
 
             {/* Category */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-orange p-6">
+              <label htmlFor="category" className="block text-sm font-semibold text-white mb-4">
                 Category
               </label>
               <select
@@ -227,11 +229,11 @@ const EditTransaction: React.FC = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.category
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
               >
                 {categories.map((category) => (
                   <option key={category} value={category}>
@@ -240,13 +242,13 @@ const EditTransaction: React.FC = () => {
                 ))}
               </select>
               {errors.category && (
-                <p className="mt-2 text-sm text-red-600">{errors.category}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.category}</p>
               )}
             </div>
 
             {/* Date */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="card-colorful card-purple p-6">
+              <label htmlFor="date" className="block text-sm font-semibold text-white mb-4">
                 Date
               </label>
               <input
@@ -255,14 +257,14 @@ const EditTransaction: React.FC = () => {
                 id="date"
                 value={formData.date}
                 onChange={handleChange}
-                className={`block w-full px-4 py-4 rounded-xl transition-all duration-200 ${
+                className={`input-field py-4 ${
                   errors.date
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                    : 'border-gray-200 focus:ring-blue-500 focus:border-blue-500'
-                } bg-white`}
+                    ? 'border-red-400/50 focus:ring-red-400 focus:border-red-400'
+                    : ''
+                }`}
               />
               {errors.date && (
-                <p className="mt-2 text-sm text-red-600">{errors.date}</p>
+                <p className="mt-2 text-sm text-red-400 font-medium">{errors.date}</p>
               )}
             </div>
 
